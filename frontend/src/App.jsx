@@ -13,6 +13,7 @@ function App(){
 
     if(!city.trim()){
       setError("Please enter a city name");
+      setWeather(null);
       return;
     }
 
