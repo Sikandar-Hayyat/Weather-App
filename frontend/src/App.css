@@ -1,43 +1,53 @@
 body {
-  margin:0;
+  margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #87ceeb ;
+  background-color: #87ceeb;
   min-height: 100vh;
 }
-.app{
+
+.app {
   min-height: 100vh;
-  display: flex ;
+  display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 40px;
   box-sizing: border-box;
 }
-.title{
-  margin-bottom: 0 0 30px ;
-  font-size: 40px ;
+
+.title {
+  margin: 0 0 30px;
+  font-size: 40px;
   color: white;
 }
-.search-box{
+
+/* =========================
+   Search
+   ========================= */
+
+.search-box {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.search-controls{
+
+.search-controls {
   display: flex;
   align-items: center;
-  gap: 10px ;
+  gap: 10px;
 }
-input{
-  padding: 12px 15px ;
+
+input {
+  padding: 12px 15px;
   width: 250px;
   font-size: 16px;
-  border : none;
+  border: none;
   border-radius: 10px;
   outline: none;
   box-sizing: border-box;
 }
-button{
+
+button {
   padding: 12px 20px;
   font-size: 16px;
   border: none;
@@ -47,13 +57,20 @@ button{
   cursor: pointer;
   transition: 0.2s;
 }
+
 button:hover {
   background: #005ecc;
 }
+
 button:disabled {
   background: #888;
   cursor: not-allowed;
 }
+
+/* =========================
+   Weather Card
+   ========================= */
+
 .weather-card {
   text-align: center;
   margin: 30px auto;
@@ -63,32 +80,153 @@ button:disabled {
   padding: 25px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
+
 .weather-card img {
   width: 120px;
   height: 120px;
 }
+
 .weather-card h2 {
-  margin-bottom: 5px 0 20px;
+  margin: 0 0 20px;
   font-size: 26px;
 }
+
 .weather-card p {
   margin: 10px 0;
   font-size: 16px;
 }
-.temperature{
+
+.temperature {
   font-size: 32px;
-  font-weight: bold ;
+  font-weight: bold;
 }
-.loading{
+
+/* =========================
+   Loading & Error
+   ========================= */
+
+.loading {
   margin-top: 20px;
   font-size: 18px;
   font-weight: bold;
 }
-.error{
+
+.error {
   margin-top: 20px;
   font-size: 16px;
   font-weight: bold;
 }
+
+/* =========================
+   Weather History Controls
+   ========================= */
+
+.history-controls {
+  margin-top: 35px;
+  padding: 25px;
+  border-radius: 12px;
+  background: #f5f7fa;
+}
+
+.history-controls h2 {
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+.date-controls {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.date-controls div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.date-controls label {
+  font-weight: 600;
+}
+
+.date-controls input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.date-controls button {
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+/* =========================
+   Historical Results
+   ========================= */
+
+.history-results {
+  width: 90%;
+  max-width: 900px;
+  margin-top: 35px;
+}
+
+.history-results h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.history-table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 15px;
+}
+
+.history-table {
+  width: 100%;
+  min-width: 650px;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.history-table th,
+.history-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.history-table th {
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+}
+
+.history-table td {
+  color: #374151;
+}
+
+.history-table tbody tr:hover {
+  background: #f5f7fa;
+}
+
+.no-history {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  background: #f5f7fa;
+  border-radius: 8px;
+}
+
+/* =========================
+   Responsive Design
+   ========================= */
+
 @media (max-width: 600px) {
   .app {
     padding: 30px 15px;
@@ -118,5 +256,22 @@ button:disabled {
     width: 100%;
     max-width: 320px;
     box-sizing: border-box;
+  }
+
+  .history-controls {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .history-results {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .history-table th,
+  .history-table td {
+    padding: 10px;
+    font-size: 14px;
   }
 }
