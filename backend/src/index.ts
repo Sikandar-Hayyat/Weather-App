@@ -6,6 +6,8 @@ import cors from "cors";
 import connectDB from "./config/db";
 import Weather from "./models/weather";
 import City from "./models/city";
+import { createServer } from "http";
+import { WebSocketServer } from "ws";
 
 dotenv.config();
 
@@ -15,7 +17,20 @@ import "./jobs/weatherJob";
 
 const app = express();
 app.use(cors());
-const PORT = process.env.PORT||3000;
+
+const PORT = process.env.PORT || 3000;
+
+const server = createServer(app);
+
+const wss = new WebSocketServer({ server, path: "/ws" });
+
+wss.on("connection", (ws) => {
+    console.log("WebSocket client connected");
+
+    ws.on("message", (message) => {
+        console.log("Message from frontend:", message.toString());
+    });
+});
 
 app.get("/",(req, res)=>{
       res.json({
@@ -39,6 +54,16 @@ app.get("/weather", async (req,res)=>{
              `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}&units=metric`
        )
     const weatherData = response.data;
+    wss.clients.forEach((client) => {
+  if (client.readyState === 1) {
+    client.send(
+      JSON.stringify({
+        type: "weather",
+        ...weatherData
+      })
+    );
+  }
+});
 
        await City.findOneAndUpdate(
        { name: weatherData.name },
@@ -147,6 +172,6 @@ app.get("/history", async (req, res) => {
 });
 
 connectDB();
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

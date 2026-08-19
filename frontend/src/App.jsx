@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./App.css";
 import WeatherCard from "./components/WeatherCard";
 import HistoryTable from "./components/historyTable";
@@ -16,6 +16,40 @@ function App() {
   const [historyLoading, setHistoryLoading] = useState(false);
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
+  
+  useEffect(() => {
+  const socket = new WebSocket("ws://localhost:3000/ws");
+
+  socket.onopen = () => {
+    console.log("WebSocket connected");
+
+    socket.send("Hello Backend!");
+  };
+
+socket.onmessage = (event) => {
+  console.log("Raw message:", event.data);
+
+  const data = JSON.parse(event.data);
+
+  console.log("Parsed data:", data);
+
+  if (data.type === "weather") {
+    setWeather(data);
+  }
+};
+
+  socket.onerror = (error) => {
+    console.error("WebSocket error:", error);
+  };
+
+  socket.onclose = () => {
+    console.log("WebSocket disconnected");
+  };
+
+  return () => {
+    socket.close();
+  };
+}, []);
 
   const getWeather = async () => {
     if (!city.trim()) {
