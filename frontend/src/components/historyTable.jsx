@@ -16,22 +16,11 @@ function HistoryTable({ history }) {
 
           <tbody>
             {history.map((record) => (
-              <tr key={record._id}>
-                <td>
-                  {new Date(record.date).toLocaleString()}
-                </td>
-
-                <td>
-                  {record.averageTemperature.toFixed(1)}°C
-                </td>
-
-                <td>
-                  {record.averageHumidity.toFixed(1)}%
-                </td>
-
-                <td>
-                  {record.description}
-                </td>
+              <tr key={new Date(record.date).getTime()}>
+                <td>{new Date(record.date).toLocaleString()}</td>
+                <td>{record.averageTemperature.toFixed(1)}°C</td>
+                <td>{record.averageHumidity.toFixed(1)}%</td>
+                <td>{record.description}</td>
               </tr>
             ))}
           </tbody>

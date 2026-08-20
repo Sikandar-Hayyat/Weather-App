@@ -110,37 +110,6 @@ Completed:
 * Date validation
 * Frontend component organization
 
-### Task 3 — WebSocket Integration
-
-Completed:
-
-* WebSocket connection between React frontend and Node.js backend
-* WebSocket connection lifecycle handling using `onopen`, `onmessage`, `onerror`, and `onclose`
-* Two-way communication between frontend and backend
-* JSON-formatted WebSocket messages
-* Integration of real OpenWeather API data with WebSocket communication
-* Sending retrieved weather data from the Node.js backend to connected React clients
-
-### WebSocket Communication Flow
-
-```text
-React Frontend
-      ↓
-HTTP Weather Request
-      ↓
-Node.js Backend
-      ↓
-OpenWeather API
-      ↓
-Node.js Backend
-      ↓
-WebSocket
-      ↓
-React Frontend
-      ↓
-WeatherCard
-
-
 ## Security
 
 Sensitive environment variables such as API keys and database credentials are stored in a `.env` file and are excluded from GitHub using `.gitignore`.
